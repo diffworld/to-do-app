@@ -7,7 +7,7 @@ export default function Header() {
 
     return (
         <div>
-            <h1>TODO APP</h1>
+            <h1><i class="fas fa-tasks"></i> my to-do</h1>
             <LoadingUI isLoading={httpState.loading} />
         </div>
     )

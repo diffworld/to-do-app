@@ -8,7 +8,7 @@ import { TodoContextProvider } from './context/todo';
 function App() {
   return (    
     <TodoContextProvider>
-      <div>
+      <div class="wrapper">
         <Header />
         <AddTodoForm />
         <TodoList />
