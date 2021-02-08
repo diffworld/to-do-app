@@ -14,10 +14,10 @@ export const TodoContextProvider = ({ children }) => {
             status: TODO_STATUS.ACTIVE };
         setTodoList(todoList.concat(newTodo));
     }
-    const setAsDone = (id) => {
+    const toggleStatus = (id) => {
         const index = todoList.findIndex( todo => todo.id === id );
         const newArray = [...todoList];
-        newArray[index].status = TODO_STATUS.DONE;
+        newArray[index].status = (newArray[index].status === TODO_STATUS.ACTIVE) ? TODO_STATUS.DONE: TODO_STATUS.ACTIVE;
         setTodoList(newArray);
     };
     const delTodo = (id) => {
@@ -29,7 +29,7 @@ export const TodoContextProvider = ({ children }) => {
         <TodosContext.Provider
             value={{ todoList,
                     addTodo,
-                    setAsDone,
+                    toggleStatus,
                     delTodo }}>
             {children}
         </TodosContext.Provider>
