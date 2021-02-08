@@ -1,8 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TodosContext, TODO_STATUS } from '../context/todo';
+import LoadingUI from '../ui/loading';
 
 export default function TodoList() {
-    const { todoList, toggleStatus, delTodo } = useContext(TodosContext);
+    const { todoList, toggleStatus, delTodo, getTodo } = useContext(TodosContext);
+
+    useEffect(() => {
+        getTodo();
+    }, [] );
+
     return (
         <div>
             <div>
