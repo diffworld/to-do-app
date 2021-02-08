@@ -3,7 +3,7 @@ import { TodosContext } from '../context/todo';
 
 export default function AddTodoForm() {
     const [inputState, setInputState] = useState('');
-    const todoContext = useContext(TodosContext);
+    const { addTodo } = useContext(TodosContext);
 
     const handleInputChange = (e) => {
         setInputState(e.target.value);
@@ -11,7 +11,7 @@ export default function AddTodoForm() {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        todoContext.addTodo(e.target.todoInput.value);
+        addTodo(e.target.todoInput.value);
         setInputState('');
     }
 

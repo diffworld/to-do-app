@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { TodosContext } from '../context/todo';
 
 export default function TodoList() {
-    const todoContext = useContext(TodosContext);
+    const { todoList, setAsDone } = useContext(TodosContext);
     return (
         <div>
-            {todoContext.todoList.map( todo => {
+            {todoList.map( todo => {
                 return <div key={todo.id}>
-                            {todo.content}
-                            <button onClick={(id) => todoContext.delTodo(todo.id)}>X</button>
+                            {todo.content} 
+                            [{todo.status}]
+                            <button onClick={(id) => setAsDone(todo.id)}>DONE</button>
                         </div>
             })}
         </div>
