@@ -9,20 +9,42 @@ export const TodoContextProvider = ({ children }) => {
 
     const addTodo = (content) => {
         const newTodo = {
-            id: Date.now(),
             content: content,
-            status: TODO_STATUS.ACTIVE };
-        setTodoList(todoList.concat(newTodo));
+            status: TODO_STATUS.ACTIVE
+        };
+        
+        fetch('https://todo-app-diffworld-default-rtdb.firebaseio.com/todo.json', {
+            method: 'POST',
+            body: JSON.stringify(newTodo),
+            header: { 'Content-Type': 'application/json' }
+        }).then(reponse => { return reponse.json()
+        }).then(responseData => {
+            newTodo.id = responseData.name;
+            setTodoList(todoList.concat(newTodo));
+        });
     }
+
     const toggleStatus = (id) => {
         const index = todoList.findIndex( todo => todo.id === id );
-        const newArray = [...todoList];
-        newArray[index].status = (newArray[index].status === TODO_STATUS.ACTIVE) ? TODO_STATUS.DONE: TODO_STATUS.ACTIVE;
-        setTodoList(newArray);
+        const newStatus = (todoList[index].status === TODO_STATUS.ACTIVE) ? TODO_STATUS.DONE: TODO_STATUS.ACTIVE;
+
+        fetch(`https://todo-app-diffworld-default-rtdb.firebaseio.com/todo/${id}.json`, {
+            method: 'PATCH',
+            body: JSON.stringify({ status: newStatus }),
+        }).then(responseData => {
+            const updatedArray = [...todoList];
+            updatedArray[index].status = newStatus;
+            setTodoList(updatedArray);
+        });
     };
+
     const delTodo = (id) => {
-        const updatedTodo = todoList.filter( todo => todo.id !== id );
-        setTodoList(updatedTodo);
+        fetch(`https://todo-app-diffworld-default-rtdb.firebaseio.com/todo/${id}.json`, {
+            method: 'DELETE'
+        }).then(responseData => {
+            const updatedTodo = todoList.filter( todo => todo.id !== id );
+            setTodoList(updatedTodo);
+        });
     };
 
     return (
