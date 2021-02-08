@@ -11,8 +11,8 @@ export default function AddTodoForm() {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        const updatedTodoList = [...todoContext.todoList, e.target.todoInput.value];
-        todoContext.setTodoList(updatedTodoList);
+        todoContext.addTodo(e.target.todoInput.value);
+        setInputState('');
     }
 
     return (

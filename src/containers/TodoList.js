@@ -6,7 +6,10 @@ export default function TodoList() {
     return (
         <div>
             {todoContext.todoList.map( todo => {
-                return <p>{todo}</p>
+                return <div key={todo.id}>
+                            {todo.content}
+                            <button onClick={(id) => todoContext.delTodo(todo.id)}>X</button>
+                        </div>
             })}
         </div>
     )
