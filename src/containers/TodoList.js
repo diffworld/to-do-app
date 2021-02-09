@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TodosContext, TODO_STATUS } from '../context/todo';
 import LoadingUI from '../ui/loading';
 
@@ -10,39 +10,35 @@ export default function TodoList() {
     }, [] );
 
     let pendingItems, doneItems = null;
-    pendingItems = todoList.slice(0).reverse().map( todo => {
-        if (todo.status === TODO_STATUS.ACTIVE ) {
-            return  <li key={todo.id}>
-                    <button class="doneButton" onClick={(id) => toggleStatus(todo.id)}><i class="fas fa-check"></i></button>
-                    <div><span>{todo.content}</span></div>                                    
-                    <button onClick={(id) => delTodo(todo.id)}><i class="far fa-trash-alt"></i></button>
-                  </li>
-        }
-    });
-    doneItems = todoList.slice(0).reverse().map( todo => {
-        if (todo.status === TODO_STATUS.DONE ) {
-            return  <li key={todo.id}>
-                    <button class="doneButton" onClick={(id) => toggleStatus(todo.id)}><i class="fas fa-check"></i></button>
-                    <div><span>{todo.content}</span></div>                                    
-                    <button onClick={(id) => delTodo(todo.id)}><i class="far fa-trash-alt"></i></button>
-                  </li>
-        }
-    });
+    pendingItems = todoList.filter(todo => todo.status === TODO_STATUS.ACTIVE);
+    doneItems = todoList.filter(todo => todo.status === TODO_STATUS.DONE);
 
     return (        
         <div>
             <div class="listBox">
                 <h2>Pending</h2>
                 <ul class="todoList">
-                    {pendingItems}                    
-                    {(pendingItems.length == 0) ? <p class="noItem">👋🏼 No pending todo, add one!</p>: ''}
+                    {pendingItems.slice(0).reverse().map( todo => {
+                        return  <li key={todo.id}>
+                                <button class="doneButton" onClick={(id) => toggleStatus(todo.id)}><i class="fas fa-check"></i></button>
+                                <div><span>{todo.content}</span></div>                                    
+                                <button onClick={(id) => delTodo(todo.id)}><i class="far fa-trash-alt"></i></button>
+                                </li>
+                    })}
+                    {(pendingItems.length ===0 ) ? <p class="noItem">👋🏼 No pending todo, add one!</p>: ''}
                 </ul>
             </div>
             <div class="listBox">
                 <h2>Done</h2>
                 <ul class="todoList done">
-                    {doneItems}
-                    {(doneItems.length == 0) ? <p class="noItem">✌🏼 Yay</p>: ''}
+                    {doneItems.slice(0).reverse().map( todo => {
+                        return  <li key={todo.id}>
+                                <button class="doneButton" onClick={(id) => toggleStatus(todo.id)}><i class="fas fa-check"></i></button>
+                                <div><span>{todo.content}</span></div>                                    
+                                <button onClick={(id) => delTodo(todo.id)}><i class="far fa-trash-alt"></i></button>
+                                </li>
+                    })}
+                    {(doneItems.length === 0 ) ? <p class="noItem">✌️ Yay</p>: ''}
                 </ul>
             </div>
         </div>
