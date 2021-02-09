@@ -138,12 +138,28 @@ h2 {
   background-color: transparent;
   border: 0;
 }
+.todoList button:active,
+.todoList button:focus {
+  border: none;
+  outline: 0;
+}
 .todoList button i {
-  color: #796465;
+  font-size: 22px;
+  color: #cb8589;
   cursor: pointer;
 }
-.todoList button:hover i {
+.todoList button:hover i,
+.todoList button i:focus {
   color: #060203;
+  outline: 0;
+}
+.todoList .doneButton:active i:before,
+.todoList .doneButton:focus i:before {
+  color: blue;
+  content: "\f14a";
+}
+.todoList .revertButton:active i {
+  outline: 0;
 }
 
 .noItem {
