@@ -15,3 +15,4 @@ Firebase Realtime Database
  - `localStorage` -- Store self-generated `userId` to assign to the items
 ## Future Improvement
  - Improve CSS classes for each component
+ - Edit added to-do items
