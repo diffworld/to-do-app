@@ -1,5 +1,6 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import httpReducer from '../reducer/httpState';
+import { userContext } from '../context/user';
 
 export const TodosContext = React.createContext();
 
@@ -8,10 +9,13 @@ export const TODO_STATUS = { 'ACTIVE': 'active', 'DONE': 'done' };
 export const TodoContextProvider = ({ children }) => {
     const [ todoList, setTodoList ] = useState([]);
     const [ httpState, httpDispatch ] = useReducer(httpReducer, {loading: false, error: null});
+    const { getUserId } = useContext(userContext);
+
+    const userId = getUserId();
 
     const getTodo = () => {
         httpDispatch({ type: 'SEND' });
-        fetch('https://todo-app-diffworld-default-rtdb.firebaseio.com/todo.json', {
+        fetch(`https://todo-app-diffworld-default-rtdb.firebaseio.com/todo.json?orderBy="userId"&equalTo="${userId}"`, {
             method: 'GET',
             header: { 'Content-Type': 'application/json' }
         }).then(reponse => { return reponse.json()
@@ -34,9 +38,10 @@ export const TodoContextProvider = ({ children }) => {
     const addTodo = (content) => {
         const newTodo = {
             content: content,
-            status: TODO_STATUS.ACTIVE
+            status: TODO_STATUS.ACTIVE,
+            userId: getUserId(),
+            timestamp: Date.now()
         };
-
         httpDispatch({ type: 'SEND' });
         fetch('https://todo-app-diffworld-default-rtdb.firebaseio.com/todo.json', {
             method: 'POST',

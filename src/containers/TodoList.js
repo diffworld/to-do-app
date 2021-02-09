@@ -33,7 +33,7 @@ export default function TodoList() {
                 <ul class="todoList done">
                     {doneItems.slice(0).reverse().map( todo => {
                         return  <li key={todo.id}>
-                                <button class="doneButton" onClick={(id) => toggleStatus(todo.id)}><i class="fas fa-check"></i></button>
+                                <button class="doneButton" onClick={(id) => toggleStatus(todo.id)}><i class="fas fa-undo"></i></button>
                                 <div><span>{todo.content}</span></div>                                    
                                 <button onClick={(id) => delTodo(todo.id)}><i class="far fa-trash-alt"></i></button>
                                 </li>
