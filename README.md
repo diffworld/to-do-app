@@ -16,3 +16,4 @@ Firebase Realtime Database
 ## Future Improvement
  - Improve CSS classes for each component
  - Edit added to-do items
+ - Cleanup to-do items based on times or run
