@@ -130,6 +130,10 @@ h2 {
   border-bottom: 1px solid #E8D2AE;
 }
 
+.todoList.done li {
+  color: #796465;
+}
+
 .todoList button {
   background-color: transparent;
   border: 0;
@@ -142,9 +146,8 @@ h2 {
   color: #060203;
 }
 
-.noTodo {
-  color: #d7b29d;
-  font-style: italic;
+.noItem {
+  color: #cb8589;
 }
 
 /* Footer */
@@ -152,4 +155,39 @@ h2 {
   background-color: #d7b29d;
   padding: 40px 0;
   text-align: center;
+}
+
+/* Loading Spiner */
+.loadingSpiner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+.loadingSpiner:after {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #d7b29d;
+  border-color: #d7b29d transparent #d7b29d transparent;
+  animation: loadingSpiner 1.2s linear infinite;
+}
+@keyframes loadingSpiner {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+/* Header */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+}
+.headerStatus {
+  text-align: right;
+  margin-top: 40px;
 }

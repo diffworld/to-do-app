@@ -19,7 +19,7 @@ export default function AddTodoForm() {
     return (
         <div>
             <form class="form-inline" onSubmit={handleOnSubmit}>
-                <input type='text' name='todoInput' value={inputState} onChange={handleInputChange} placeholder="Add todo here..."/>
+                <input type='text' name='todoInput' value={inputState} onChange={handleInputChange} placeholder="Add todo here..." maxLength='255'/>
                 <button class="plus-button"></button>
             </form>
         </div>
